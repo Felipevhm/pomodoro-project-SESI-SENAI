@@ -1,0 +1,89 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  /* font-size: 1.6; */
+}
+
+html, body, .container {
+  width: 100%;
+  height: 100%;
+
+  background-image: radial-gradient(circle at 74.18% 116.45%, #ffafff 0, #ffa6ff 12.5%, #ff9bff 25%, #ff8dff 37.5%, #cb7cf2 50%, #9a6ad4 62.5%, #6f5bb8 75%, #4a4d9f 87.5%, #274289 100%);
+}
+
+.container{
+  display: flex;
+
+  align-items: center; 
+  justify-content: center; 
+
+}
+
+.page{
+
+  display: flex;
+  flex-direction: column;
+
+  width: 20%;
+  height: 80%;
+
+  border-radius: 30px;
+  align-items: center;
+  justify-content: center;
+
+
+  background: rgba(57, 112, 151, 0.443);
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.5)
+}
+
+
+.visor{
+  margin-top: 20px;
+  width: 140px;
+  height: 140px;
+
+  margin-bottom: 40px;
+
+  border: 3px solid #b8b4b4;
+  color: whitesmoke;
+
+  border-radius: 100%;
+
+  font-family: "Aldrich", sans-serif;
+
+  font-size: 38px;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+section{
+  width: 55%;
+  height: 80%;
+
+
+  background-color: rgba(128, 128, 128, 0.406);
+
+  
+}
+
+.hidden{
+  display: none;
+}
+
+.button{
+
+  font-size: 56px;
+  color: whitesmoke;
+
+}
+
+.button i {
+  cursor: pointer;
+}
