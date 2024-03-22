@@ -10,13 +10,14 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <title>Pomodoro Fit</title>
     <link rel="stylesheet" href="./style.css">
+    <script src="lista-alongamento.js"></script>
     <script src="script.js" defer></script>
 </head>
 <body>
  <div class="container">
         <div class="page">
             <div class="visor">
-                <p>25:00</p>
+                <p class="counter">25:00</p>
             </div>
             <div class="botoes">
                 <div  class="button iniciar">
@@ -27,11 +28,27 @@
                 </div>
             </div>
         </div>
-    <section class="hidden">
+    <section class="">
      <div class="exercise">
-        <h2 class="exercise-name">Nome do exercício</h2>
-        <div class="img-exercise"></div>
+        <h2 class="exercise-name">COMECE UM ALONGAMENTO</h2>
+        <div class="alongamento">
+            <div class="img-exercise"></div>
+            <div class="text-area">
+                <p class="alongamento-title">Alongamento de braços</p>
+                <p class="alongamento-desc">Levante um braço à altura do peito, cruzando-o à frente do corpo. Com a outra mão, pressione o cotovelo para sentir o alongamento. Mantenha por 15 segundos e troque de braço.</p>
+            </div>
+        </div>
      </div>
+
+     <div class="section-timer-area">
+        <div class="timer-choose">
+            <i class="fa-solid fa-play"></i>
+            <p>05:00</p>
+        </div>
+        <i class="fa-regular fa-circle check-button"></i>
+    </div>
+
+
     </section>
 </div>
 </body>
