@@ -1,7 +1,5 @@
 let acc = 0
-
 let startTimer = document.querySelector(".fa-solid")
-
 let visorTimer = document.querySelector('p')
 
 startTimer.addEventListener("click", () => {
