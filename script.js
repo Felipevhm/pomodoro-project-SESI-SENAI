@@ -11,11 +11,9 @@ startTimer.addEventListener("click", () => {
 if(startTimer.classList.contains("fa-play")){
   console.log("Deu pause")
 
-
-
 }
 else {
-  console.log(" Deu play")
+  console.log("Deu play")
 let timer = setInterval(function() {
         count--;
         updateTimer();
@@ -27,9 +25,7 @@ let timer = setInterval(function() {
     }, 1000);
 }
 
-
 })
-
 let section = document.querySelector("section")
 let button = document.querySelector(".fa-child-reaching")
 
