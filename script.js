@@ -5,6 +5,9 @@ const timerAlongamento = document.querySelector('timer-choose')
 const restTime = document.querySelector('.rest-time');
 const restPlayButton = document.querySelector('.rest-play-button')
 const restStopButton = document.querySelector('.rest-stop-button')
+const visorBtn = document.querySelector('.botoes')
+const btnStop = document.querySelector('.button-stop')
+const stopRandomText = document.querySelector('.stop-random-text')
 
 let countdown;
 let timeRemaining = 0.05 * 60; //3 segundos
@@ -31,6 +34,9 @@ function updateCounter() {
     counterElement.innerText = `${minutes}:${secondsFormated}`
 }
 
+let noRepeat = [];
+let randomNumber;
+
 function toggleTimer() {
     if (playButton.classList.contains("fa-play")) {
         playButton.classList.remove("fa-play");
@@ -46,13 +52,19 @@ function toggleTimer() {
                 section.classList.remove('hidden')
                 clearInterval(countdown);
                 playButton.classList.add('fa-play')
-
-                let randomNumber = Math.floor(Math.random() * 5)
-                console.log(randomNumber)
-                    
+                // let randomNumber;
+                // do {
+                //     randomNumber = Math.floor(Math.random() * 5)
+                // } while(noRepeat.includes(randomNumber))
+                // noRepeat.push(randomNumber)
+                randomNumber = Math.floor(Math.random() * 5)
                 document.querySelector('.alongamento-title').innerText = alongamentoJson[randomNumber].nome;
                 document.querySelector('.alongamento-desc').innerText = alongamentoJson[randomNumber].execucao;
                 document.querySelector('.img-exercise').style.backgroundImage = `url(${alongamentoJson[randomNumber].img})`;
+                playButton.removeEventListener('click', toggleTimer)
+                playButton.style.cursor = 'default'
+                btnStop.removeEventListener('click', btnStop)
+                btnStop.style.cursor = 'default'
             }
         }, 1000);
     } else {
@@ -65,8 +77,7 @@ function toggleTimer() {
 playButton.addEventListener("click", toggleTimer);
 updateCounter(); 
 
-let BtnStop = document.querySelector('.button-stop')
-BtnStop.addEventListener('click', () => {
+function stopCountDown(){
     clearInterval(countdown);
     counterElement.innerHTML = '00:03'
     timeRemaining = 0.05 * 60;
@@ -75,7 +86,7 @@ BtnStop.addEventListener('click', () => {
         playButton.classList.remove('fa-pause')
         playButton.classList.add('fa-play')
     }
-})
+}
 
 const checkButton = document.querySelector('.check-button')
 let isClicked = false;
@@ -104,6 +115,10 @@ checkButton.addEventListener('click', () => {
     isClicked = false;
     restTime.innerText = '00:03'
     restTimeRemaining = 0.05 * 60;
+    playButton.addEventListener('click', toggleTimer)
+    playButton.style.cursor = 'pointer'
+    btnStop.addEventListener('click', stopCountDown)
+    btnStop.style.cursor = 'pointer'
 })
 
 function restTimeStart(){
@@ -119,7 +134,7 @@ function restTimeStart(){
 
     restTime.innerText = `${restMinutes}:${restSeconds}`
 
-    if (restTimeRemaining <= 0){
+    if (restTimeRemaining < 0){
         clearInterval(loopRestInterval)
         restTime.innerHTML = 'finalizado'
         restPlayButton.classList.remove('fa-pause')

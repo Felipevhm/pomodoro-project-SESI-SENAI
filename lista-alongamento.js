@@ -30,7 +30,7 @@ let alongamentoJson = [
         "id": 4,
         "nome": "Elevação de quadril",
         "desc": "Alivia tensão nos quadris e lombar.",
-        "execucao": "Deite-se de costas, cruze uma perna sobre a outra, incline-se para o lado contrário da perna cruzada, estendendo o braço acima da cabeça. Mantenha a posição por 15 segundos e depois troque de lado, repetindo o movimento.",
+        "execucao": "Para executar a elevação de quadril, deite-se de costas com os joelhos dobrados e pés no chão, braços ao lado do corpo. Eleve o quadril, formando uma linha reta dos joelhos aos ombros, contraia os glúteos no topo e retorne à posição inicial controladamente. Mantenha o core ativado e a respiração coordenada durante o movimento.",
         "calorias": 6,
         "dificuldade": "Média",
         "img": "assets/elevacao-quadril.png"
