@@ -102,6 +102,8 @@ checkButton.addEventListener('mouseout', () =>{
         checkButton.classList.add('fa-circle')
     }
 })
+let countAlongamentos = 0;
+let arrayAlongamentos = [];
 checkButton.addEventListener('click', () => {
     isClicked = true;
     checkButton.classList.add('fa-circle-check');
@@ -119,7 +121,11 @@ checkButton.addEventListener('click', () => {
     playButton.style.cursor = 'pointer'
     btnStop.addEventListener('click', stopCountDown)
     btnStop.style.cursor = 'pointer'
+    countAlongamentos++;
+    arrayAlongamentos.push({number: randomNumber, nome:alongamentoJson[randomNumber].nome})
+    console.log(arrayAlongamentos)
 })
+
 
 function restTimeStart(){
     let restMinutes = Math.floor(restTimeRemaining / 60);
