@@ -123,7 +123,7 @@ section {
   background-size: cover;
   background-color: rgba(252, 252, 252, 0.422);
   box-shadow: 2rem 1rem 5rem -3rem rgba(0, 0, 0, 0.5);
-  border-radius: 3rem;
+  border-radius: 1.5rem;
 }
 
 .exercise-name{
@@ -179,4 +179,13 @@ section {
   font-size: 2rem;
   margin-top: 1rem;
   text-align: justify;
+}
+
+.timer-choose div:first-child{
+  display: flex;
+  gap: 2rem;
+}
+
+.rest-time{
+  text-transform: uppercase;
 }

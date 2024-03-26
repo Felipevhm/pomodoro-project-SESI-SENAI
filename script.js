@@ -1,24 +1,41 @@
 const playButton = document.querySelector(".iniciar i");
 const counterElement = document.querySelector(".visor p");
-const btnApper = document.querySelector('.fa-child-reaching');
 const section = document.querySelector('section')
-const checkBtn = document.querySelector('.check-button')
 const timerAlongamento = document.querySelector('timer-choose')
+const restTime = document.querySelector('.rest-time');
+const restPlayButton = document.querySelector('.rest-play-button')
+const restStopButton = document.querySelector('.rest-stop-button')
 
 let countdown;
-let timeRemaining = 0.05 * 60;
+let timeRemaining = 0.05 * 60; //3 segundos
+let restTimeRemaining = 0.05 * 60; //5 minutos
 
+
+// 125 / 60 = 2
+// 125 % 60 = 5 
 function updateCounter() {
     let minutes = Math.floor(timeRemaining / 60);
     let seconds = timeRemaining % 60;
-    counterElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    let secondsFormated;
+
+    if (seconds < 10){
+        secondsFormated = `0${seconds}`
+    } else{
+        secondsFormated = seconds
+    }
+
+    if (minutes < 10){
+        minutes = `0${minutes}`
+    }
+
+    counterElement.innerText = `${minutes}:${secondsFormated}`
 }
 
 function toggleTimer() {
     if (playButton.classList.contains("fa-play")) {
         playButton.classList.remove("fa-play");
         playButton.classList.add("fa-pause");
-        if (counterElement.textContent.trim() === "25:00") {
+        if (counterElement.innerText.trim() === "25:00") { //trim remove espaços antes e depois do texto e compara com "25:00"
             timeRemaining = 25 * 60;
         }
         countdown = setInterval(() => {
@@ -27,12 +44,18 @@ function toggleTimer() {
                 updateCounter();
             } else if (timeRemaining == 0){
                 section.classList.remove('hidden')
-            } else {
                 clearInterval(countdown);
+                playButton.classList.add('fa-play')
+
+                let randomNumber = Math.floor(Math.random() * 5)
+                console.log(randomNumber)
+                    
+                document.querySelector('.alongamento-title').innerText = alongamentoJson[randomNumber].nome;
+                document.querySelector('.alongamento-desc').innerText = alongamentoJson[randomNumber].execucao;
+                document.querySelector('.img-exercise').style.backgroundImage = `url(${alongamentoJson[randomNumber].img})`;
             }
         }, 1000);
     } else {
-        // Pausar o contador
         playButton.classList.add("fa-play");
         playButton.classList.remove("fa-pause");
         clearInterval(countdown);
@@ -42,14 +65,10 @@ function toggleTimer() {
 playButton.addEventListener("click", toggleTimer);
 updateCounter(); 
 
-btnApper.addEventListener('click', () => {
-  section.classList.toggle('hidden')
-})
-
 let BtnStop = document.querySelector('.button-stop')
 BtnStop.addEventListener('click', () => {
     clearInterval(countdown);
-    counterElement.innerHTML = '0:03'
+    counterElement.innerHTML = '00:03'
     timeRemaining = 0.05 * 60;
 
     if (playButton.classList.contains('fa-pause')){
@@ -64,8 +83,6 @@ checkButton.addEventListener('mouseover', () =>{
     if(!isClicked){
         checkButton.classList.remove('fa-circle');
         checkButton.classList.add('fa-circle-check')
-        timerAlongamento.classList.add('bg-finished-alongamento')
-
     }
 })
 checkButton.addEventListener('mouseout', () =>{
@@ -80,10 +97,57 @@ checkButton.addEventListener('click', () => {
     checkButton.classList.remove('fa-circle');
     checkButton.classList.add('fa-solid');
     checkButton.style.color = 'rgba(255, 255, 255, 0.474);'
-
     section.classList.add('hidden')
-    counterElement.innerHTML = "0:03"
+    counterElement.innerHTML = "00:03"
     timeRemaining = 0.05 * 60
     checkButton.classList.remove('fa-solid');
     isClicked = false;
+    restTime.innerText = '00:03'
+    restTimeRemaining = 0.05 * 60;
+})
+
+function restTimeStart(){
+    let restMinutes = Math.floor(restTimeRemaining / 60);
+    let restSeconds = (restTimeRemaining % 60)
+    
+    if(restSeconds < 10){
+        restSeconds = `0${restSeconds}`
+    }
+    if(restMinutes < 10){
+        restMinutes = `0${restMinutes}`
+    }
+
+    restTime.innerText = `${restMinutes}:${restSeconds}`
+
+    if (restTimeRemaining <= 0){
+        clearInterval(loopRestInterval)
+        restTime.innerHTML = 'finalizado'
+        restPlayButton.classList.remove('fa-pause')
+        restPlayButton.classList.add('fa-play')
+    } else {
+        restTimeRemaining--;   
+    }
+}
+
+let loopRestInterval;
+
+restPlayButton.addEventListener('click', () => {
+    restPlayButton.classList.toggle('fa-pause');
+    restPlayButton.classList.toggle('fa-play');
+
+    if (restPlayButton.classList.contains('fa-pause')){
+        loopRestInterval = setInterval(restTimeStart, 1000)
+    } else {
+        clearInterval(loopRestInterval)
+    }
+})
+
+restStopButton.addEventListener('click', () => {
+    if(restPlayButton.classList.contains('fa-pause')){
+        restPlayButton.classList.remove('fa-pause');
+        restPlayButton.classList.add('fa-play');
+        restTimeRemaining = 0.05 * 60;
+    }
+    clearInterval(loopRestInterval);
+    restTime.innerHTML = '00:03';
 })

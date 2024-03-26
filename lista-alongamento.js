@@ -1,4 +1,4 @@
-[
+let alongamentoJson = [
     {
         "id": 1,
         "nome": "Alongamento de braços",
