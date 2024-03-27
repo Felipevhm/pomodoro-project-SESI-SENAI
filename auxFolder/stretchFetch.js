@@ -1,4 +1,7 @@
 const apiKey = '1fZ4NS89JhTbeeXvEu8Uhg==zWf7ioezJ86uDQ3u'
+
+let exercisesList = []
+
 console.log(apiKey)
 
 async function getExercises() {
@@ -21,14 +24,10 @@ async function getExercises() {
     return data;
 }
 
-// const batata = await getExercises()
-// .then(receivedData => {
-//     return receivedData;
-// });
-
 async function main() {
    const output = await getExercises();
-   console.log(output);
+   exercisesList = output
+   console.log(output)
 }
 
  main();

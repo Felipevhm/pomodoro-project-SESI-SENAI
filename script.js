@@ -13,6 +13,61 @@ let countdown;
 let timeRemaining = 0.05 * 60; //3 segundos
 let restTimeRemaining = 0.05 * 60; //5 minutos
 
+// // Retirar API key antes de mandar o projeto final !!
+const apiKey = '1fZ4NS89JhTbeeXvEu8Uhg==zWf7ioezJ86uDQ3u'
+let exercisesList = []; // Declaração da variável fora da função
+
+function getExercises() {
+    let options = {
+        method: 'GET',
+        headers: { 'x-api-key': apiKey },
+        contentType: 'application/json'
+    };
+
+    let url = 'https://api.api-ninjas.com/v1/exercises?type=stretching&offset=10';
+
+     fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+            exercisesList = data;
+            console.log(exercisesList);
+        });
+}
+
+getExercises()
+
+console.log(exercisesList)
+
+// let exercisesList 
+
+
+
+
+// function getExercises() {
+
+//    let options = {
+//    method: 'GET',
+//    headers: { 'x-api-key': apiKey }
+// }
+ 
+//    let url =  'https://api.api-ninjas.com/v1/exercises?type=stretching&offset=30'
+ 
+//    fetch(url, options)
+//    .then(response => response.json())
+//    .then(data => {
+//     exercisesList = data
+//     console.log(exercisesList)
+
+
+// })
+// }
+
+// getExercises();
+// console.log("no EL:" + exercisesList)
+
+
+
+
 
 // 125 / 60 = 2
 // 125 % 60 = 5 
@@ -32,12 +87,14 @@ function updateCounter() {
     }
 
     counterElement.innerText = `${minutes}:${secondsFormated}`
+   
 }
 
 let noRepeat = [];
 let randomNumber;
 
 function toggleTimer() {
+  
     if (playButton.classList.contains("fa-play")) {
         playButton.classList.remove("fa-play");
         playButton.classList.add("fa-pause");
@@ -185,6 +242,8 @@ function updateTimer() {
     if (seconds < 10) { seconds = "0" + seconds; }
     visorTimer.innerHTML = minutes + ':' + seconds;
 }
+
+console.log(exercisesList)
 
 // startButton.onclick = function() {
 //     let timer = setInterval(function() {
