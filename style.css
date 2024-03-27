@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Athiti:wght@200;300;400;500;600;700&family=Mako&family=Niramit:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -45,8 +47,8 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 35%;
-  height: 80%;
+  width: 45%;
+  height: 60%;
   background-color: rgba(128, 128, 128, 0.406);
   position: relative;
   z-index: 1;
@@ -54,11 +56,16 @@ section {
   margin-left: -5rem;
   border-bottom-right-radius: 8rem;
   border-top-right-radius: 8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  font-family: "Aldrich", sans-serif;
+  color: var(--white);
 }
 
 .page {
   width: 20%;
-  height: 80%;
+  height: 60%;
   max-width: 50rem;
   display: flex;
   flex-direction: column;
@@ -94,6 +101,20 @@ section {
   cursor: pointer;
 }
 
+.exercise{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-left: 4rem;
+  width: 85%;
+  height: 60%;
+  background-color: rgba(255, 255, 255, 0.474);
+  padding: 3rem;
+  border-radius: 3rem;
+  box-shadow: 2rem 1rem 5rem -3rem rgba(0, 0, 0, 0.5);
+}
+
 .img-exercise{
   background-image: url(assets/alongamento-bracos.png);
   width: 20rem;
@@ -102,10 +123,78 @@ section {
   background-size: cover;
   background-color: rgba(252, 252, 252, 0.422);
   box-shadow: 2rem 1rem 5rem -3rem rgba(0, 0, 0, 0.5);
-  border-radius: 3rem;
-  margin-top: 3rem;
+  border-radius: 1.5rem;
 }
 
 .exercise-name{
   font-size: 3rem;
+}
+
+.section-timer-area{
+  display: flex;
+  align-items: center;
+  width: 60%;
+  padding: 0.5rem;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.section-timer-area i, .section-timer-area p{
+  font-size: 5rem;
+  cursor: pointer;
+}
+
+.timer-choose{
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  border: 0.1rem solid white;
+  border-radius: 2rem;
+  padding: 1rem 2rem;
+}
+
+.alongamento{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 3rem;
+}
+
+.alongamento-title{
+  font-family: "Mako", sans-serif;
+  font-size: 2.3rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+}
+
+.text-area{
+  width: 80%;
+}
+
+.alongamento-desc{
+  font-family: "Mako", sans-serif;
+  font-size: 2rem;
+  margin-top: 1rem;
+  text-align: justify;
+}
+
+.timer-choose div:first-child{
+  display: flex;
+  gap: 2rem;
+}
+
+.rest-time{
+  text-transform: uppercase;
+}
+
+.stop-random-text{
+  font-size: 2rem;
+  color: rgb(57, 112, 151);
+  background-color: var(--white);
+  text-align: center;
+  line-height: 4rem;
+  border-radius: 2rem;
 }

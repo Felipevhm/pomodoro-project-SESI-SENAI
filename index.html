@@ -10,28 +10,54 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <title>Pomodoro Fit</title>
     <link rel="stylesheet" href="./style.css">
+    <script src="lista-alongamento.js"></script>
     <script src="script.js" defer></script>
 </head>
 <body>
  <div class="container">
         <div class="page">
-            <div class="visor">
-                <p id="timer-display">25:00</p>
+            <div>
+                <div class="visor">
+                    <p class="counter">00:03</p>
+                </div>
+                <p class="stop-random-text hidden">Não há mais exercícios</p>
             </div>
+
             <div class="botoes">
                 <div  class="button iniciar">
                     <i class="fa-solid fa-play" ></i>
                 </div>
-                <div class="button">
+                <!-- <div class="button">
                     <i class="fa-solid fa-child-reaching"></i>
+                </div> -->
+                <div class="button">
+                    <i class="fa-regular fa-circle-stop button-stop"></i>
                 </div>
             </div>
         </div>
     <section class="hidden">
      <div class="exercise">
-        <h2 class="exercise-name">Nome do exercício</h2>
-        <div class="img-exercise"></div>
+        <h2 class="exercise-name">COMECE UM ALONGAMENTO</h2>
+        <div class="alongamento">
+            <div class="img-exercise"></div>
+            <div class="text-area">
+                <p class="alongamento-title">Alongamento de braços</p>
+                <p class="alongamento-desc">Levante um braço à altura do peito, cruzando-o à frente do corpo. Com a outra mão, pressione o cotovelo para sentir o alongamento. Mantenha por 15 segundos e troque de braço.</p>
+            </div>
+        </div>
      </div>
+
+     <div class="section-timer-area">
+        <div class="timer-choose">
+            <div>
+                <i class="fa-solid fa-play rest-play-button"></i>
+                <i class="fa-regular fa-circle-stop rest-stop-button"></i>
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <p class="rest-time">00:03</p>
+        </div>
+        <i class="fa-regular fa-circle check-button"></i>
+    </div>
     </section>
 </div>
 </body>
