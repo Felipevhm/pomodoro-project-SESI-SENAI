@@ -178,22 +178,36 @@ checkButton.addEventListener('click', () => {
     btnStop.addEventListener('click', stopCountDown)
     btnStop.style.cursor = 'pointer'
     
+    console.log('___Alongamento realizado (check-button click)___') // Apenas para facilitar visualização no console.
+
     recoverCounterStates()
+
+    console.log('countAlongamentos: ' + countAlongamentos)
+    console.log("exercisesList[countAlongamentos]:")
+    console.log(exercisesList[countAlongamentos])
+
+    arrayAlongamentos.push({number: countAlongamentos, nome:exercisesList[countAlongamentos].name})
+    console.log('arrayAlongamentos: ')
+    console.log(arrayAlongamentos)
+
     countAlongamentos++;
-    if(countAlongamentos>2){
+
+    // Atualizar para countAlongamentos>9 no if abaixo. 
+    // (Fiz o teste e se colocar 8 ele não pega o último alongamento do array execisesList.)
+    if(countAlongamentos>2){ 
         countOffset++
         countAlongamentos = 0
         getExercises()
     }
 
     saveCounterStates()
-    console.log('countAlongamentos')
-    console.log(countAlongamentos)
-    console.log("exercisesList[countAlongamentos]")
-    console.log(exercisesList[countAlongamentos])
+    // console.log('countAlongamentos')
+    // console.log(countAlongamentos)
+    // console.log("exercisesList[countAlongamentos]")
+    // console.log(exercisesList[countAlongamentos])
 
-    arrayAlongamentos.push({number: countAlongamentos, nome:exercisesList[countAlongamentos].name})
-    console.log(arrayAlongamentos)
+    // arrayAlongamentos.push({number: countAlongamentos, nome:exercisesList[countAlongamentos].name})
+    // console.log(arrayAlongamentos)
 })
 
 
