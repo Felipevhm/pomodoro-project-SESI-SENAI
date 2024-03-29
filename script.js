@@ -24,50 +24,15 @@ function getExercises() {
         contentType: 'application/json'
     };
 
-    let url = 'https://api.api-ninjas.com/v1/exercises?type=stretching&offset=10';
+    let url = `https://api.api-ninjas.com/v1/exercises?type=stretching&offset=${countOffset*10}`;
 
      fetch(url, options)
         .then(response => response.json())
         .then(data => {
             exercisesList = data;
             console.log(exercisesList);
-        });
+                 });
 }
-
-getExercises()
-
-console.log(exercisesList)
-
-// let exercisesList 
-
-
-
-
-// function getExercises() {
-
-//    let options = {
-//    method: 'GET',
-//    headers: { 'x-api-key': apiKey }
-// }
- 
-//    let url =  'https://api.api-ninjas.com/v1/exercises?type=stretching&offset=30'
- 
-//    fetch(url, options)
-//    .then(response => response.json())
-//    .then(data => {
-//     exercisesList = data
-//     console.log(exercisesList)
-
-
-// })
-// }
-
-// getExercises();
-// console.log("no EL:" + exercisesList)
-
-
-
-
 
 // 125 / 60 = 2
 // 125 % 60 = 5 
@@ -98,6 +63,9 @@ function toggleTimer() {
     if (playButton.classList.contains("fa-play")) {
         playButton.classList.remove("fa-play");
         playButton.classList.add("fa-pause");
+
+
+     
         if (counterElement.innerText.trim() === "25:00") { //trim remove espaços antes e depois do texto e compara com "25:00"
             timeRemaining = 25 * 60;
         }
@@ -159,8 +127,44 @@ checkButton.addEventListener('mouseout', () =>{
         checkButton.classList.add('fa-circle')
     }
 })
-let countAlongamentos = 0;
+
+// zz
 let arrayAlongamentos = [];
+let countAlongamentos = 0;
+let countOffset = 0;
+
+getExercises()
+
+
+function saveCounterStates(){
+    localStorage.setItem("currentCounter",countAlongamentos)
+    console.log("Salvo no localStorage, counter: " + countAlongamentos)
+ 
+    localStorage.setItem("currentOffset",countOffset)
+    console.log("Salvo no localStorage, offset: " + countOffset)
+ 
+ }
+ 
+ function recoverCounterStates(){
+    let storedCounter = localStorage.getItem("currentCounter")  
+    console.log("Recuperado do localStorage | counter: " + storedCounter )
+ 
+    let storedOffset = localStorage.getItem("currentOffset")  
+    console.log("Recuperado do localStorage | offset: " + storedOffset )
+    
+ 
+    countAlongamentos = storedCounter
+    countOffset = storedOffset
+ }
+
+if(localStorage.getItem('currentCounter') === null
+ &&localStorage.getItem('currentOffset') === null){
+    saveCounterStates()
+}
+else{
+    recoverCounterStates()
+}
+
 checkButton.addEventListener('click', () => {
     isClicked = true;
     checkButton.classList.add('fa-circle-check');
@@ -178,8 +182,22 @@ checkButton.addEventListener('click', () => {
     playButton.style.cursor = 'pointer'
     btnStop.addEventListener('click', stopCountDown)
     btnStop.style.cursor = 'pointer'
+    
+    recoverCounterStates()
     countAlongamentos++;
-    arrayAlongamentos.push({number: randomNumber, nome:alongamentoJson[randomNumber].nome})
+    if(countAlongamentos>2){
+        countOffset++
+        countAlongamentos = 0
+        getExercises()
+    }
+
+    saveCounterStates()
+    console.log('countAlongamentos')
+    console.log(countAlongamentos)
+    console.log("exercisesList[countAlongamentos]")
+    console.log(exercisesList[countAlongamentos])
+
+    arrayAlongamentos.push({number: countAlongamentos, nome:exercisesList[countAlongamentos].name})
     console.log(arrayAlongamentos)
 })
 
