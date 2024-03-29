@@ -55,9 +55,6 @@ function updateCounter() {
    
 }
 
-let noRepeat = [];
-let randomNumber;
-
 function toggleTimer() {
   
     if (playButton.classList.contains("fa-play")) {
@@ -77,15 +74,10 @@ function toggleTimer() {
                 section.classList.remove('hidden')
                 clearInterval(countdown);
                 playButton.classList.add('fa-play')
-                // let randomNumber;
-                // do {
-                //     randomNumber = Math.floor(Math.random() * 5)
-                // } while(noRepeat.includes(randomNumber))
-                // noRepeat.push(randomNumber)
-                randomNumber = Math.floor(Math.random() * 5)
-                document.querySelector('.alongamento-title').innerText = alongamentoJson[randomNumber].nome;
-                document.querySelector('.alongamento-desc').innerText = alongamentoJson[randomNumber].execucao;
-                document.querySelector('.img-exercise').style.backgroundImage = `url(${alongamentoJson[randomNumber].img})`;
+
+                document.querySelector('.alongamento-title').innerText = exercisesList[countAlongamentos].name;
+                document.querySelector('.alongamento-desc').innerText = exercisesList[countAlongamentos].instructions;
+               // document.querySelector('.img-exercise').style.backgroundImage = `url(${alongamentoJson[randomNumber].img})`;
                 playButton.removeEventListener('click', toggleTimer)
                 playButton.style.cursor = 'default'
                 btnStop.removeEventListener('click', btnStop)
@@ -156,6 +148,7 @@ function saveCounterStates(){
     countAlongamentos = storedCounter
     countOffset = storedOffset
  }
+ 
 
 if(localStorage.getItem('currentCounter') === null
  &&localStorage.getItem('currentOffset') === null){
