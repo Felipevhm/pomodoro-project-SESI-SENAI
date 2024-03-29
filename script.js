@@ -77,7 +77,7 @@ function toggleTimer() {
 
                 document.querySelector('.alongamento-title').innerText = exercisesList[countAlongamentos].name;
                 document.querySelector('.alongamento-desc').innerText = exercisesList[countAlongamentos].instructions;
-               // document.querySelector('.img-exercise').style.backgroundImage = `url(${alongamentoJson[randomNumber].img})`;
+
                 playButton.removeEventListener('click', toggleTimer)
                 playButton.style.cursor = 'default'
                 btnStop.removeEventListener('click', btnStop)
@@ -96,7 +96,9 @@ updateCounter();
 
 function stopCountDown(){
     clearInterval(countdown);
+    // ATUALIZAR ALERT 25:00
     counterElement.innerHTML = '00:03'
+    // ATUALIZAR ALERT 25 * 60
     timeRemaining = 0.05 * 60;
 
     if (playButton.classList.contains('fa-pause')){
