@@ -172,12 +172,12 @@ section {
 }
 
 .text-area{
-  width: 80%;
+  width: 100%;
 }
 
 .alongamento-desc{
   font-family: "Mako", sans-serif;
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-top: 1rem;
   text-align: justify;
 }
