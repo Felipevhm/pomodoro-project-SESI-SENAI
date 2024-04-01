@@ -5,11 +5,10 @@
   padding: 0;
   box-sizing: border-box;
   font-size: calc((10 / 16) * 100%);
-  /* font-size: 1.6; */
 }
 
 :root {
-  --bg: rgb(39, 66, 137);
+  --bg: rgba(47, 88, 191, 0.629);
   --white: #FFFFFF;
 
 }
@@ -33,7 +32,7 @@ body,
   width: 20rem;
   height: 20rem;
   margin-top: 4rem;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
   border: 3px solid var(--white);
   color: var(--white);
   border-radius: 100%;
@@ -85,7 +84,11 @@ section {
 
 .botoes{
   display: flex;
+  justify-content: space-evenly;
+
+
   gap: 5rem;
+  width: 100%;
 }
 
 .bordernone{
@@ -109,7 +112,7 @@ section {
   justify-content: space-evenly;
   margin-left: 4rem;
   width: 85%;
-  height: 60%;
+  height: 80%;
   background-color: rgba(255, 255, 255, 0.474);
   padding: 3rem;
   border-radius: 3rem;
@@ -141,12 +144,13 @@ section {
 }
 
 .section-timer-area i, .section-timer-area p{
-  font-size: 5rem;
+  font-size: 2rem;
   cursor: pointer;
 }
 
 .timer-choose{
   width: 80%;
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -154,6 +158,10 @@ section {
   border: 0.1rem solid white;
   border-radius: 2rem;
   padding: 1rem 2rem;
+}
+
+.timer-choose div i {
+  font-size: 2.5rem;
 }
 
 .alongamento{

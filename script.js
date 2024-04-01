@@ -8,149 +8,29 @@ const restStopButton = document.querySelector('.rest-stop-button')
 const visorBtn = document.querySelector('.botoes')
 const btnStop = document.querySelector('.button-stop')
 const stopRandomText = document.querySelector('.stop-random-text')
-
-let countdown;
-let timeRemaining = 0.05 * 60; //3 segundos
-let restTimeRemaining = 0.05 * 60; //5 minutos
-
+const checkButton = document.querySelector('.check-button')
+const initCount =  0.1* 60;
 // // Retirar API key antes de mandar o projeto final !!
 const apiKey = '1fZ4NS89JhTbeeXvEu8Uhg==zWf7ioezJ86uDQ3u'
-let exercisesList = []; // Declaração da variável fora da função
 
-function getExercises() {
-    let options = {
-        method: 'GET',
-        headers: { 'x-api-key': apiKey },
-        contentType: 'application/json'
-    };
+let countdown;
+let timeRemaining = 0.05 * 60; //3 segundos 
+let restTimeRemaining = 0.05 * 60; //3 segundos
 
-    let url = `https://api.api-ninjas.com/v1/exercises?type=stretching&offset=${countOffset*10}`;
-
-     fetch(url, options)
-        .then(response => response.json())
-        .then(data => {
-            exercisesList = data;
-            console.log(exercisesList);
-                 });
-}
-
-// 125 / 60 = 2
-// 125 % 60 = 5 
-function updateCounter() {
-    let minutes = Math.floor(timeRemaining / 60);
-    let seconds = timeRemaining % 60;
-    let secondsFormated;
-
-    if (seconds < 10){
-        secondsFormated = `0${seconds}`
-    } else{
-        secondsFormated = seconds
-    }
-
-    if (minutes < 10){
-        minutes = `0${minutes}`
-    }
-
-    counterElement.innerText = `${minutes}:${secondsFormated}`
-   
-}
-
-function toggleTimer() {
-  
-    if (playButton.classList.contains("fa-play")) {
-        playButton.classList.remove("fa-play");
-        playButton.classList.add("fa-pause");
-
-
-     
-        if (counterElement.innerText.trim() === "25:00") { //trim remove espaços antes e depois do texto e compara com "25:00"
-            timeRemaining = 25 * 60;
-        }
-        countdown = setInterval(() => {
-            if (timeRemaining > 0) {
-                timeRemaining--;
-                updateCounter();
-            } else if (timeRemaining == 0){
-                section.classList.remove('hidden')
-                clearInterval(countdown);
-                playButton.classList.add('fa-play')
-
-                document.querySelector('.alongamento-title').innerText = exercisesList[countAlongamentos].name;
-                document.querySelector('.alongamento-desc').innerText = exercisesList[countAlongamentos].instructions;
-
-                playButton.removeEventListener('click', toggleTimer)
-                playButton.style.cursor = 'default'
-                btnStop.removeEventListener('click', btnStop)
-                btnStop.style.cursor = 'default'
-            }
-        }, 1000);
-    } else {
-        playButton.classList.add("fa-play");
-        playButton.classList.remove("fa-pause");
-        clearInterval(countdown);
-    }
-}
-
-playButton.addEventListener("click", toggleTimer);
-updateCounter(); 
-
-function stopCountDown(){
-    clearInterval(countdown);
-    // ATUALIZAR ALERT 25:00
-    counterElement.innerHTML = '00:03'
-    // ATUALIZAR ALERT 25 * 60
-    timeRemaining = 0.05 * 60;
-
-    if (playButton.classList.contains('fa-pause')){
-        playButton.classList.remove('fa-pause')
-        playButton.classList.add('fa-play')
-    }
-}
-
-const checkButton = document.querySelector('.check-button')
 let isClicked = false;
-checkButton.addEventListener('mouseover', () =>{
-    if(!isClicked){
-        checkButton.classList.remove('fa-circle');
-        checkButton.classList.add('fa-circle-check')
-    }
-})
-checkButton.addEventListener('mouseout', () =>{
-    if(!isClicked){
-        checkButton.classList.remove('fa-circle-check');
-        checkButton.classList.add('fa-circle')
-    }
-})
 
-// zz
 let arrayAlongamentos = [];
 let countAlongamentos = 0;
 let countOffset = 0;
+let loopRestInterval;
+let count =  initCount // 25 minutos em segundos
+let startButton = document.getElementById('startButton');
+
+
+let exercisesList = []; // Declaração da variável fora da função
 
 getExercises()
-
-
-function saveCounterStates(){
-    localStorage.setItem("currentCounter",countAlongamentos)
-    console.log("Salvo no localStorage, counter: " + countAlongamentos)
- 
-    localStorage.setItem("currentOffset",countOffset)
-    console.log("Salvo no localStorage, offset: " + countOffset)
- 
- }
- 
- function recoverCounterStates(){
-    let storedCounter = localStorage.getItem("currentCounter")  
-    console.log("Recuperado do localStorage | counter: " + storedCounter )
- 
-    let storedOffset = localStorage.getItem("currentOffset")  
-    console.log("Recuperado do localStorage | offset: " + storedOffset )
-    
- 
-    countAlongamentos = storedCounter
-    countOffset = storedOffset
- }
- 
+updateCounter(); 
 
 if(localStorage.getItem('currentCounter') === null
  &&localStorage.getItem('currentOffset') === null){
@@ -159,6 +39,8 @@ if(localStorage.getItem('currentCounter') === null
 else{
     recoverCounterStates()
 }
+
+playButton.addEventListener("click", toggleTimer);
 
 checkButton.addEventListener('click', () => {
     isClicked = true;
@@ -192,7 +74,7 @@ checkButton.addEventListener('click', () => {
 
     countAlongamentos++;
 
-    // Atualizar para countAlongamentos>9 no if abaixo. 
+    // Atualizar para countAlongamentos>9 no if abaixo. zz
     // (Fiz o teste e se colocar 8 ele não pega o último alongamento do array execisesList.)
     if(countAlongamentos>2){ 
         countOffset++
@@ -201,15 +83,152 @@ checkButton.addEventListener('click', () => {
     }
 
     saveCounterStates()
-    // console.log('countAlongamentos')
-    // console.log(countAlongamentos)
-    // console.log("exercisesList[countAlongamentos]")
-    // console.log(exercisesList[countAlongamentos])
-
-    // arrayAlongamentos.push({number: countAlongamentos, nome:exercisesList[countAlongamentos].name})
-    // console.log(arrayAlongamentos)
+})
+checkButton.addEventListener('mouseover', () =>{
+    if(!isClicked){
+        checkButton.classList.remove('fa-circle');
+        checkButton.classList.add('fa-circle-check')
+    }
 })
 
+checkButton.addEventListener('mouseout', () =>{
+    if(!isClicked){
+        checkButton.classList.remove('fa-circle-check');
+        checkButton.classList.add('fa-circle')
+    }
+})
+
+restPlayButton.addEventListener('click', () => {
+    restPlayButton.classList.toggle('fa-pause');
+    restPlayButton.classList.toggle('fa-play');
+
+    if (restPlayButton.classList.contains('fa-pause')){
+        loopRestInterval = setInterval(restTimeStart, 1000)
+    } else {
+        clearInterval(loopRestInterval)
+    }
+})
+
+restStopButton.addEventListener('click', () => {
+    if(restPlayButton.classList.contains('fa-pause')){
+        restPlayButton.classList.remove('fa-pause');
+        restPlayButton.classList.add('fa-play');
+        restTimeRemaining = 0.05 * 60;
+    }
+    clearInterval(loopRestInterval);
+    restTime.innerHTML = '00:03';
+})
+
+
+
+
+function getExercises() {
+    let options = {
+        method: 'GET',
+        headers: { 'x-api-key': apiKey },
+        contentType: 'application/json'
+    };
+
+    let url = `https://api.api-ninjas.com/v1/exercises?type=stretching&offset=${countOffset*10}`;
+
+     fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+            exercisesList = data;
+            console.log(exercisesList);
+                 });
+}
+
+// ------
+
+function updateCounter() {
+    let minutes = Math.floor(timeRemaining / 60);
+    let seconds = timeRemaining % 60;
+    let secondsFormated;
+
+    if (seconds < 10){
+        secondsFormated = `0${seconds}`
+    } else{
+        secondsFormated = seconds
+    }
+
+    if (minutes < 10){
+        minutes = `0${minutes}`
+    }
+
+    counterElement.innerText = `${minutes}:${secondsFormated}`
+   
+}
+
+function toggleTimer() {
+  
+    if (playButton.classList.contains("fa-play")) {
+        playButton.classList.remove("fa-play");
+        playButton.classList.add("fa-pause");
+     
+        if (counterElement.innerText.trim() === "25:00") { //trim remove espaços antes e depois do texto e compara com "25:00"
+            timeRemaining = 25 * 60;
+        }
+        countdown = setInterval(() => {
+            if (timeRemaining > 0) {
+                timeRemaining--;
+                updateCounter();
+            } else if (timeRemaining == 0){
+                section.classList.remove('hidden')
+                clearInterval(countdown);
+                playButton.classList.add('fa-play')
+
+                document.querySelector('.alongamento-title').innerText = exercisesList[countAlongamentos].name;
+                document.querySelector('.alongamento-desc').innerText = exercisesList[countAlongamentos].instructions;
+
+                playButton.removeEventListener('click', toggleTimer)
+                playButton.style.cursor = 'default'
+                btnStop.removeEventListener('click', btnStop)
+                btnStop.style.cursor = 'default'
+            }
+        }, 1000);
+    } else {
+        playButton.classList.add("fa-play");
+        playButton.classList.remove("fa-pause");
+        clearInterval(countdown);
+    }
+}
+
+// ------
+
+function stopCountDown(){
+    clearInterval(countdown);
+    // ATUALIZAR ALERT 25:00
+    counterElement.innerHTML = '00:03'
+    // ATUALIZAR ALERT 25 * 60
+    timeRemaining = 0.05 * 60;
+
+    if (playButton.classList.contains('fa-pause')){
+        playButton.classList.remove('fa-pause')
+        playButton.classList.add('fa-play')
+    }
+}
+
+function saveCounterStates(){
+    localStorage.setItem("currentCounter",countAlongamentos)
+    console.log("Salvo no localStorage, counter: " + countAlongamentos)
+ 
+    localStorage.setItem("currentOffset",countOffset)
+    console.log("Salvo no localStorage, offset: " + countOffset)
+ 
+ }
+ 
+ function recoverCounterStates(){
+    let storedCounter = localStorage.getItem("currentCounter")  
+    console.log("Recuperado do localStorage | counter: " + storedCounter )
+ 
+    let storedOffset = localStorage.getItem("currentOffset")  
+    console.log("Recuperado do localStorage | offset: " + storedOffset )
+    
+ 
+    countAlongamentos = storedCounter
+    countOffset = storedOffset
+ }
 
 function restTimeStart(){
     let restMinutes = Math.floor(restTimeRemaining / 60);
@@ -234,34 +253,6 @@ function restTimeStart(){
     }
 }
 
-let loopRestInterval;
-
-restPlayButton.addEventListener('click', () => {
-    restPlayButton.classList.toggle('fa-pause');
-    restPlayButton.classList.toggle('fa-play');
-
-    if (restPlayButton.classList.contains('fa-pause')){
-        loopRestInterval = setInterval(restTimeStart, 1000)
-    } else {
-        clearInterval(loopRestInterval)
-    }
-})
-
-restStopButton.addEventListener('click', () => {
-    if(restPlayButton.classList.contains('fa-pause')){
-        restPlayButton.classList.remove('fa-pause');
-        restPlayButton.classList.add('fa-play');
-        restTimeRemaining = 0.05 * 60;
-    }
-    clearInterval(loopRestInterval);
-    restTime.innerHTML = '00:03';
-})
-
-const initCount =  0.1* 60;
-let count =  initCount // 25 minutos em segundos
-// let timerElement = document.getElementById('timer');
-let startButton = document.getElementById('startButton');
-
 function updateTimer() {
     let minutes = Math.floor(count / 60);
     let seconds = count % 60;
@@ -270,16 +261,5 @@ function updateTimer() {
     visorTimer.innerHTML = minutes + ':' + seconds;
 }
 
-console.log(exercisesList)
 
-// startButton.onclick = function() {
-//     let timer = setInterval(function() {
-//         count--;
-//         updateTimer();
-//         if (count <= 0) {
-//             clearInterval(timer);
-//             count=initCount
-//             updateTimer();
-//         }
-//     }, 1000);
-// }
+
