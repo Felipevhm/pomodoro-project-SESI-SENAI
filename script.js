@@ -12,10 +12,16 @@ const stopRandomText = document.querySelector('.stop-random-text')
 let countdown;
 let timeRemaining = 0.05 * 60; //3 segundos
 let restTimeRemaining = 0.05 * 60; //5 minutos
+let arrayAlongamentos = [];
+let countAlongamentos = 0;
+let countOffset = 0;
+const initCount =  0.1* 60;
+let loopRestInterval;
+let count =  initCount // 25 minutos em segundos
+let startButton = document.getElementById('startButton');
 
-// // Retirar API key antes de mandar o projeto final !!
 const apiKey = '1fZ4NS89JhTbeeXvEu8Uhg==zWf7ioezJ86uDQ3u'
-let exercisesList = []; // Declaração da variável fora da função
+let exercisesList = [];
 
 function getExercises() {
     let options = {
@@ -34,8 +40,8 @@ function getExercises() {
                  });
 }
 
-// 125 / 60 = 2
-// 125 % 60 = 5 
+getExercises()
+
 function updateCounter() {
     let minutes = Math.floor(timeRemaining / 60);
     let seconds = timeRemaining % 60;
@@ -63,7 +69,7 @@ function toggleTimer() {
 
 
      
-        if (counterElement.innerText.trim() === "25:00") { //trim remove espaços antes e depois do texto e compara com "25:00"
+        if (counterElement.innerText.trim() === "25:00") {
             timeRemaining = 25 * 60;
         }
         countdown = setInterval(() => {
@@ -121,14 +127,6 @@ checkButton.addEventListener('mouseout', () =>{
         checkButton.classList.add('fa-circle')
     }
 })
-
-// zz
-let arrayAlongamentos = [];
-let countAlongamentos = 0;
-let countOffset = 0;
-
-getExercises()
-
 
 function saveCounterStates(){
     localStorage.setItem("currentCounter",countAlongamentos)
@@ -201,15 +199,7 @@ checkButton.addEventListener('click', () => {
     }
 
     saveCounterStates()
-    // console.log('countAlongamentos')
-    // console.log(countAlongamentos)
-    // console.log("exercisesList[countAlongamentos]")
-    // console.log(exercisesList[countAlongamentos])
-
-    // arrayAlongamentos.push({number: countAlongamentos, nome:exercisesList[countAlongamentos].name})
-    // console.log(arrayAlongamentos)
 })
-
 
 function restTimeStart(){
     let restMinutes = Math.floor(restTimeRemaining / 60);
@@ -234,8 +224,6 @@ function restTimeStart(){
     }
 }
 
-let loopRestInterval;
-
 restPlayButton.addEventListener('click', () => {
     restPlayButton.classList.toggle('fa-pause');
     restPlayButton.classList.toggle('fa-play');
@@ -257,10 +245,7 @@ restStopButton.addEventListener('click', () => {
     restTime.innerHTML = '00:03';
 })
 
-const initCount =  0.1* 60;
-let count =  initCount // 25 minutos em segundos
-// let timerElement = document.getElementById('timer');
-let startButton = document.getElementById('startButton');
+
 
 function updateTimer() {
     let minutes = Math.floor(count / 60);
@@ -271,15 +256,3 @@ function updateTimer() {
 }
 
 console.log(exercisesList)
-
-// startButton.onclick = function() {
-//     let timer = setInterval(function() {
-//         count--;
-//         updateTimer();
-//         if (count <= 0) {
-//             clearInterval(timer);
-//             count=initCount
-//             updateTimer();
-//         }
-//     }, 1000);
-// }
