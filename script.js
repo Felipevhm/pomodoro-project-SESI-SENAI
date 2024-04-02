@@ -9,15 +9,15 @@ const visorBtn = document.querySelector('.botoes')
 const btnStop = document.querySelector('.button-stop')
 const stopRandomText = document.querySelector('.stop-random-text')
 const checkButton = document.querySelector('.check-button')
-const initCount =  0.1* 60;
+const initCount =  25* 60;
 // // Retirar API key antes de mandar o projeto final !!
-const apiKey = '1fZ4NS89JhTbeeXvEu8Uhg==zWf7ioezJ86uDQ3u'
+const apiKey = 'API KEY'
 
-const pomodoroTime = (3/60) * 60; //3 segundos 
-const pomodoroRest = (3/60) * 60; //3 segundos
-const stringPomodoro = `00:03`;
-const stringRest = "00:03";
-const limiarOffset = 2;
+const pomodoroTime = 25 * 60; //3 segundos 
+const pomodoroRest = 5 * 60; //3 segundos
+const stringPomodoro = `25:00`;
+const stringRest = "05:00";
+const limiarOffset = 9;
 
 let countdown;
 let timeRemaining = pomodoroTime; 
