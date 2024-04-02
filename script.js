@@ -172,7 +172,7 @@ function toggleTimer() {
         playButton.classList.remove("fa-play");
         playButton.classList.add("fa-pause");
      
-        if (counterElement.innerText.trim() === "25:00") { //trim remove espaços antes e depois do texto e compara com "25:00"
+        if (counterElement.innerText.trim() === stringPomodoro) { //trim remove espaços antes e depois do texto e compara com "25:00"
             timeRemaining = pomodoroTime;
         }
         countdown = setInterval(() => {
