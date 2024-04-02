@@ -17,6 +17,7 @@ const pomodoroTime = (3/60) * 60; //3 segundos
 const pomodoroRest = (3/60) * 60; //3 segundos
 const stringPomodoro = `00:03`;
 const stringRest = "00:03";
+const limiarOffset = 2;
 
 let countdown;
 let timeRemaining = pomodoroTime; 
@@ -81,7 +82,7 @@ checkButton.addEventListener('click', () => {
 
     // Atualizar para countAlongamentos>9 no if abaixo. zz
     // (Fiz o teste e se colocar 8 ele não pega o último alongamento do array execisesList.)
-    if(countAlongamentos>2){ 
+    if(countAlongamentos> limiarOffset){ 
         countOffset++
         countAlongamentos = 0
         getExercises()
