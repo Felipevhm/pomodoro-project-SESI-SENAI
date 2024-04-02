@@ -13,9 +13,14 @@ const initCount =  0.1* 60;
 // // Retirar API key antes de mandar o projeto final !!
 const apiKey = '1fZ4NS89JhTbeeXvEu8Uhg==zWf7ioezJ86uDQ3u'
 
+const pomodoroTime = (3/60) * 60; //3 segundos 
+const pomodoroRest = (3/60) * 60; //3 segundos
+const stringPomodoro = `00:03`;
+const stringRest = "00:03";
+
 let countdown;
-let timeRemaining = 0.05 * 60; //3 segundos 
-let restTimeRemaining = 0.05 * 60; //3 segundos
+let timeRemaining = pomodoroTime; 
+let restTimeRemaining = pomodoroRest; 
 
 let isClicked = false;
 
@@ -49,12 +54,12 @@ checkButton.addEventListener('click', () => {
     checkButton.classList.add('fa-solid');
     checkButton.style.color = 'rgba(255, 255, 255, 0.474);'
     section.classList.add('hidden')
-    counterElement.innerHTML = "00:03"
-    timeRemaining = 0.05 * 60
+    counterElement.innerHTML = stringPomodoro
+    timeRemaining = pomodoroTime
     checkButton.classList.remove('fa-solid');
     isClicked = false;
-    restTime.innerText = '00:03'
-    restTimeRemaining = 0.05 * 60;
+    restTime.innerText = stringRest
+    restTimeRemaining = pomodoroRest;
     playButton.addEventListener('click', toggleTimer)
     playButton.style.cursor = 'pointer'
     btnStop.addEventListener('click', stopCountDown)
@@ -113,10 +118,10 @@ restStopButton.addEventListener('click', () => {
     if(restPlayButton.classList.contains('fa-pause')){
         restPlayButton.classList.remove('fa-pause');
         restPlayButton.classList.add('fa-play');
-        restTimeRemaining = 0.05 * 60;
+        restTimeRemaining = pomodoroRest;
     }
     clearInterval(loopRestInterval);
-    restTime.innerHTML = '00:03';
+    restTime.innerHTML = stringRest;
 })
 
 
@@ -167,7 +172,7 @@ function toggleTimer() {
         playButton.classList.add("fa-pause");
      
         if (counterElement.innerText.trim() === "25:00") { //trim remove espaços antes e depois do texto e compara com "25:00"
-            timeRemaining = 25 * 60;
+            timeRemaining = pomodoroTime;
         }
         countdown = setInterval(() => {
             if (timeRemaining > 0) {
@@ -199,9 +204,9 @@ function toggleTimer() {
 function stopCountDown(){
     clearInterval(countdown);
     // ATUALIZAR ALERT 25:00
-    counterElement.innerHTML = '00:03'
+    counterElement.innerHTML = stringPomodoro
     // ATUALIZAR ALERT 25 * 60
-    timeRemaining = 0.05 * 60;
+    timeRemaining = pomodoroTime;
 
     if (playButton.classList.contains('fa-pause')){
         playButton.classList.remove('fa-pause')
