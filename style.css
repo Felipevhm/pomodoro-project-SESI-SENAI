@@ -5,7 +5,6 @@
   padding: 0;
   box-sizing: border-box;
   font-size: calc((10 / 16) * 100%);
-  /* font-size: 1.6; */
 }
 
 :root {
@@ -51,8 +50,13 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+<<<<<<< HEAD
   /* width: 45%; */
   height: 20%;
+=======
+  height: 100%;
+  max-height: 384px;
+>>>>>>> 6fbffb036c20a58309cc94080d8aac87f3b88086
   padding: 2rem 2rem 0.5rem 2rem;
   background-color: rgba(128, 128, 128, 0.406);
   position: relative;
@@ -66,8 +70,6 @@ section {
 }
 
 .page {
-  /* width: 20%; */
-  /* height: 60%; */
   padding: 2rem;
   max-width: 50rem;
   display: flex;
@@ -110,8 +112,6 @@ section {
   align-items: center;
   justify-content: space-evenly;
   margin-left: 4rem;
-  /* width: 85%;
-  height: 60%; */
   padding: 3rem;
   border-radius: 3rem;
   width: 100%;
@@ -129,14 +129,12 @@ section {
 .section-timer-area{
   display: flex;
   align-items: center;
-  /* width: 60%; */
   padding: 1rem 0.5rem;
   margin-top: 0.5rem;
   justify-content: space-between;
   max-width: 90%;
   width: 100%;
   margin-left: 4rem;
-  /* width: 80%; */
 }
 
 .section-timer-area i{
@@ -210,8 +208,6 @@ section {
     }
 
     .page {
-      /* width: 20%; */
-      /* height: 60%; */
       padding: 2rem;
       width: 100%;
       max-width: 80%;
