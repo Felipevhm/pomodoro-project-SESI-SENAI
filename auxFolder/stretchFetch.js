@@ -1,5 +1,9 @@
 const apiKey = '1fZ4NS89JhTbeeXvEu8Uhg==zWf7ioezJ86uDQ3u'
 
+let exercisesList = []
+
+console.log(apiKey)
+
 async function getExercises() {
 
    let options = {
@@ -7,7 +11,7 @@ async function getExercises() {
    headers: { 'x-api-key': apiKey }
 }
  
-   let url =  'https://api.api-ninjas.com/v1/exercises?type=stretching'
+   let url =  'https://api.api-ninjas.com/v1/exercises?type=stretching&offset=30'
  
 
     let data;
@@ -20,14 +24,10 @@ async function getExercises() {
     return data;
 }
 
-// const batata = await getExercises()
-// .then(receivedData => {
-//     return receivedData;
-// });
-
 async function main() {
    const output = await getExercises();
-   console.log(output);
+   exercisesList = output
+   console.log(output)
 }
 
  main();
